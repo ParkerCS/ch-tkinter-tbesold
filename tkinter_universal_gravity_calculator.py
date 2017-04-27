@@ -50,53 +50,39 @@ class App():
         self.title = Label(master, text="GRAVITY CALCULATOR", underline = 5, bg = "cyan")
         self.title.grid(row=1, column=1, columnspan =4, sticky='e' + 'w')
 
-        self.result = Label(master, textvariable = self.answer, bg = "cyan")
+        self.result = Label(master, textvariable = self.answer)#, bg = "cyan")
         self.result.grid(row=5, column=2)
 
-        self.m1_label = Label(master, text = "enter the mass of the first object (kg)", font=my_font, bg = "cyan")
+        self.m1_label = Label(master, text = "mass of the first object (kg)", font=my_font, bg = "cyan")
         self.m1_label.grid(row=2, column=1)
         self.entry1 = Entry(master, textvariable=self.m1, bg = "cyan")
         self.entry1.grid(row=3, column=1)
 
-        self.m2_label = Label(master, text="enter the mass of the second object (kg)", font=my_font, bg = "cyan")
+        self.m2_label = Label(master, text="mass of the second object (kg)", font=my_font, bg = "cyan")
         self.m2_label.grid(row=2, column=2)
         self.entry2 = Entry(master, textvariable=self.m2, bg = "cyan")
         self.entry2.grid(row=3, column=2)
 
-        self.r_label = Label(master, text="enter the distance between the objects (m)", font = my_font, bg = "cyan")
+        self.r_label = Label(master, text= "distance between the objects (m)", font = my_font, bg = "cyan")
         self.r_label.grid(row=2, column=3)
         self.entry3 = Entry(master, textvariable=self.r, bg = "cyan")
         self.entry3.grid(row=3, column=3)
 
         #number buttons
 
-        self.calculate = Button(master, text="calculate", command=lambda:self.answer.set((6.67 * (10 ** -11) * self.m1.get() * self.m2.get() / self.r.get() ** 2)), bg = "cyan")  #the lambda stuff makes it so the stuff you want will show up
+        self.calculate = Button(master, text="calculate", command=lambda: self.solving(), bg = "cyan")
         self.calculate.grid(row=5,column=1)
 
         self.cyan = Label(master, bg = "cyan")
         self.cyan.grid(row=6, column =1, columnspan = 4, sticky= "e" + "w")
-        self.cyan = Label(master, bg="cyan")
-        self.cyan.grid(row=5, column=2, columnspan=4, sticky="e" + "w")
+        #self.cyan = Label(master, bg="cyan")
+        #self.cyan.grid(row=5, column=2, columnspan=4, sticky="e" + "w")
 
-
-
-    # when i tried to get the answer like this and adjusting the lambda function accordingly  i wouldnt get the correct answer, not quite sure why
-    #def calculations(self):
-     #   try:
-      #      self.answer.set((6.67 * (10 ** -11) * self.m1.get() * self.m2.get() / self.r.get() ** 2))
-       # except:
-        #    self.answer.set("zero division error")
-
-
-
-
-
-
-
-            #except ZeroDivisionError:
-             #   self.answer.set("zero division error")
-            #except TypeError:
-             #   self.answer.set("type conversion error")
+    def solving(self):
+        try:
+            self.answer.set(((6.67 * (10 ** -11) * self.m1.get() * self.m2.get() / self.r.get() ** 2)))
+        except ZeroDivisionError:
+            self.answer.set("you can't divide by zero")
 
 
 
